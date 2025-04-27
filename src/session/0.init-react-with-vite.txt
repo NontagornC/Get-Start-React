@@ -1,0 +1,67 @@
+Vite docs
+      https://vite.dev/guide/
+      build tool ที่จะช่วยแปลงไฟล์ใน react เป็น js,css,html ให้ browser สามารถอ่านได้ โดยตัวเก่าจะเป็น webpack จะช้ากว่า
+
+yarn create vite
+  ○ TypeScript
+│  ○ TypeScript + SWC
+│  ○ JavaScript
+│  ● JavaScript + SWC
+│  ○ React Router v7 ↗
+│  ○ TanStack Router ↗
+
+
+TypeScript
+      เป็นตัวเลือกที่สร้าง React project ด้วย TypeScript
+      TypeScript เป็น superset ของ JavaScript ที่เพิ่มระบบ static type checking
+      ช่วยให้ตรวจจับข้อผิดพลาดได้ตั้งแต่ช่วง development และมี code completion ที่ดีขึ้น
+      เหมาะสำหรับโปรเจคขนาดใหญ่หรือทีมที่ต้องการความแน่นอนของ code มากขึ้น
+
+TypeScript + SWC
+      เหมือนกับ TypeScript แต่ใช้ SWC เป็น compiler แทน
+      SWC (Speedy Web Compiler) เป็น compiler ที่เขียนด้วย Rust ที่เร็วกว่า TypeScript compiler ดั้งเดิม
+      ช่วยลดเวลาในการ compile code ได้อย่างมาก โดยเฉพาะในโปรเจคขนาดใหญ่
+      ยังคงได้ประโยชน์ของ TypeScript แต่มี development experience ที่เร็วขึ้น
+
+JavaScript
+      สร้าง React project ด้วย JavaScript ทั่วไป
+      ไม่มีระบบ type checking
+      เหมาะสำหรับโปรเจคขนาดเล็กหรือผู้ที่ไม่คุ้นเคยกับ TypeScript
+      Setup ง่ายและตรงไปตรงมา
+
+JavaScript + SWC (ที่คุณเลือก)
+      ใช้ JavaScript พร้อมกับ SWC compiler
+      ทำให้การ compile และ hot reloading เร็วขึ้นมาก
+      เหมาะสำหรับโปรเจคที่ต้องการความเร็วในการพัฒนาแต่ไม่ต้องการใช้ TypeScript
+      นี่คือตัวเลือกที่คุณเลือกไว้ซึ่งจะให้ประสบการณ์การพัฒนาที่เร็วขึ้นด้วย JavaScript
+
+React Router v7
+      สร้าง project ที่มี React Router v7 ติดตั้งไว้ล่วงหน้า
+      React Router คือไลบรารีที่ใช้จัดการการนำทางใน React application
+      Version 7 เป็นเวอร์ชันล่าสุดที่มีการปรับปรุงหลายอย่าง
+      เหมาะสำหรับแอปที่มีหลายหน้าและต้องการระบบนำทางที่แข็งแกร่ง
+
+TanStack Router
+      สร้าง project พร้อม TanStack Router (เดิมชื่อ React Query Router)
+      เป็นไลบรารีนำทางทางเลือกที่มีฟีเจอร์เน้นไปทาง type-safety และ data loading
+      มีระบบจัดการ cache และ prefetching ที่ดี
+      เหมาะสำหรับแอปที่ต้องการการนำทางที่เชื่อมโยงกับการจัดการข้อมูลอย่างใกล้ชิด
+
+
+SWC --> Speedy Web Compiler (Explain https://www.freecodecamp.org/news/what-is-speedy-web-compiler/)
+      complier ของ javascript,TypeScript ที่ถูกเขียนด้วย rust ถูกพัฒนาขึ้นเพื่อให้เร็วกว่า babel
+
+
+*** ถ้าไม่ใช้ SWC จะใช้ babel เป็นหลักในการ complier
+babel 
+      Babel เป็น JavaScript compiler ที่ทำหน้าที่แปลงโค้ด JavaScript รุ่นใหม่ให้เป็นโค้ดที่สามารถทำงานได้บนเบราว์เซอร์รุ่นเก่าหรือสภาพแวดล้อมที่รองรับเฉพาะ JavaScript รุ่นเก่า โดยมีกระบวนการทำงานดังนี้:
+      Parsing - แปลงโค้ด JavaScript เป็นโครงสร้างข้อมูลที่เรียกว่า Abstract Syntax Tree (AST)
+      Transformation - ทำการแปลง AST โดยใช้ plugins และ presets ต่างๆ เช่น:
+      แปลง ES6+ syntax (arrow functions, destructuring, classes) ให้เป็น ES5
+      แปลง JSX ให้เป็น JavaScript ที่ browser เข้าใจได้
+      แปลง TypeScript ให้เป็น JavaScript ปกติ
+      Code Generation - สร้างโค้ด JavaScript จาก AST ที่ถูกแปลงแล้ว
+
+Compiler 
+      คือโปรแกรมคอมพิวเตอร์ที่ทำหน้าที่แปลงโค้ดที่เขียนในภาษาโปรแกรมมิ่งภาษาหนึ่ง (เรียกว่า "source code") ให้เป็นอีกภาษาหนึ่ง (เรียกว่า "target code") ที่คอมพิวเตอร์หรือระบบอื่นๆ สามารถเข้าใจและทำงานได้
+

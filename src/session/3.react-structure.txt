@@ -1,0 +1,51 @@
+โครงสร้างของ Component ใน React
+React ใช้แนวคิดของ Component-Based Architecture ซึ่งช่วยให้การพัฒนา UI มีความยืดหยุ่นและจัดการได้ง่าย โดยโครงสร้างของ Component สามารถแบ่งออกเป็น Parent Component และ Child Component ดังนี้:
+
+1. Parent Component
+      เป็น Component หลักที่สามารถประกอบด้วย Child Component หลายตัว
+      มีหน้าที่จัดการข้อมูล (state) และส่งข้อมูลไปยัง Child Component ผ่าน props
+2. Child Component
+      เป็น Component ย่อยที่รับข้อมูลจาก Parent Component ผ่าน props
+      มีหน้าที่แสดงผลหรือจัดการเฉพาะส่วนของ UI
+3. Props และ State
+      Props: ใช้สำหรับส่งข้อมูลจาก Parent Component ไปยัง Child Component
+      State: ใช้สำหรับจัดการข้อมูลภายใน Component นั้น ๆ
+
+
+import React, { useState } from 'react';
+
+// Child Component
+function ChildComponent({ message, onButtonClick }) {
+  return (
+    <div>
+      <p>ข้อความจาก Parent: {message}</p>
+      <button onClick={onButtonClick}>คลิกเพื่อส่งข้อมูลกลับ</button>
+    </div>
+  );
+}
+
+// Parent Component
+function ParentComponent() {
+  const [message, setMessage] = useState('สวัสดีจาก Parent Component');
+  const [response, setResponse] = useState('');
+
+  const handleChildClick = () => {
+    setResponse('Child Component ส่งข้อมูลกลับมาแล้ว!');
+  };
+
+  return (
+    <div>
+      <h1>Parent Component</h1>
+      <ChildComponent message={message} onButtonClick={handleChildClick} />
+      <p>{response}</p>
+    </div>
+  );
+}
+
+export default ParentComponent;
+
+
+****** สรุป ******
+      Parent Component สามารถส่งข้อมูลและฟังก์ชันไปยัง Child Component ผ่าน props
+      Child Component สามารถส่งข้อมูลกลับไปยัง Parent Component ได้โดยการเรียกฟังก์ชันที่ส่งมาจาก Parent
+      การแยกโครงสร้างแบบนี้ช่วยให้โค้ดมีความยืดหยุ่นและง่ายต่อการดูแลรักษา

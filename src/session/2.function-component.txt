@@ -1,0 +1,26 @@
+Function Component ใน React คือรูปแบบการสร้าง Component ที่เป็นฟังก์ชันธรรมดาใน JavaScript โดยไม่ต้องใช้คลาส (class) เหมือนในอดีต มีลักษณะเรียบง่ายและนิยมใช้ในปัจจุบัน โดยเฉพาะเมื่อใช้ร่วมกับ React Hooks เพื่อจัดการ state และ lifecycle
+
+ตัวอย่างการใช้งาน Function Component
+สร้าง Function Component
+
+import React from 'react';
+      function Greeting(props) {
+      return <h1>สวัสดี, {props.name}!</h1>;
+      }
+
+      // ใช้งาน Function Component
+      function App() {
+      return (
+      <div>
+            <Greeting name="React Developer" />
+      </div>
+      );
+      }
+
+      export default App;
+      
+คำอธิบาย
+      Function Component: Greeting เป็นฟังก์ชันที่รับ props เป็นพารามิเตอร์ และคืนค่า JSX เพื่อแสดงผล
+      Props: ใช้สำหรับส่งข้อมูลจาก Component แม่ไปยัง Component ลูก
+      การใช้งาน: ใน App เราเรียกใช้ Greeting พร้อมส่งค่า name เป็น React Developer
+      Function Component มีข้อดีคืออ่านง่ายและเขียนโค้ดได้กระชับกว่า Class Component และเมื่อใช้ร่วมกับ React Hooks เช่น useState หรือ useEffect จะสามารถจัดการ state และ lifecycle ได้อย่างมีประสิทธิภาพ

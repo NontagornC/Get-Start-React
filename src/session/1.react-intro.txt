@@ -1,0 +1,66 @@
+What is React ?
+      - javascript library ที่จะสร้าง Virtual DOM 
+React ใช้ Virtual DOM เพื่อเพิ่มประสิทธิภาพ โดย Virtual DOM เป็นการจำลอง DOM จริงในหน่วยความจำ 
+เมื่อข้อมูลเปลี่ยนแปลง React จะเปรียบเทียบ Virtual DOM เก่าและใหม่ แล้วอัปเดตเฉพาะส่วนที่เปลี่ยนแปลงใน DOM จริง ซึ่งทำให้เว็บแอปพลิเคชันทำงานได้เร็วขึ้น
+ที่สามารถอัพเดทบางส่วนของแอพพลิเคชั่นโดยไม่ต้องโหลดใหม่ทั้ง web
+เช่น กรอก user,password แล้วรหัสไม่ถูกจะขึ้นข้อความเตือนก็จะ render ข้อความโดยไม่โหลดเว็บเพจใหม่
+
+DOM (Document Object Model)
+      DOM หรือ Document Object Model คือแบบจำลองโครงสร้างของเอกสาร HTML ในรูปแบบของ objects และ nodes ที่เบราว์เซอร์สร้างขึ้นเมื่อโหลดหน้าเว็บ
+DOM คืออะไร?
+      DOM เป็นตัวแทนของหน้าเว็บในรูปแบบของโครงสร้างต้นไม้ (tree structure) โดย:
+
+แต่ละ element ใน HTML (เช่น <div>, <p>, <body>) กลายเป็น node ในต้นไม้ DOM
+โครงสร้างนี้ทำให้ JavaScript สามารถเข้าถึงและเปลี่ยนแปลงเนื้อหา, โครงสร้าง และสไตล์ของหน้าเว็บได้
+
+ตัวอย่างโครงสร้าง DOM
+      จาก HTML:
+      html<!DOCTYPE html>
+      <html>
+      <head>
+      <title>ตัวอย่าง DOM</title>
+      </head>
+      <body>
+      <h1>สวัสดี DOM</h1>
+      <div>
+      <p>นี่คือย่อหน้า</p>
+      </div>
+      </body>
+      </html>
+      จะถูกแปลงเป็นโครงสร้างต้นไม้ DOM:
+      document
+      └── html
+            ├── head
+            │    └── title
+            │         └── "ตัวอย่าง DOM"
+            └── body
+                  ├── h1
+                  │    └── "สวัสดี DOM"
+                  └── div
+                  └── p
+                        └── "นี่คือย่อหน้า"
+
+React จะถูกเขียนด้วย file type jsx,tsx
+
+JSX คืออะไร
+      JSX (JavaScript XML) คือส่วนขยายไวยากรณ์ (syntax extension) สำหรับ JavaScript ที่ให้เราเขียนโค้ดที่ดูคล้าย HTML ใน JavaScript ได้ มันเป็นส่วนสำคัญของ React ที่ช่วยให้การเขียน UI components ทำได้ง่ายและเข้าใจได้ง่ายกว่า
+      JSX ไม่ใช่ HTML จริงๆ แต่เป็นวิธีที่ช่วยให้เราสามารถเขียนโค้ด UI ได้เหมือนกับที่เราคุ้นเคยกับ HTML โดยด้านหลัง JSX จะถูกแปลงเป็น JavaScript ด้วย compiler (เช่น Babel) ก่อนที่เบราว์เซอร์จะทำงานกับมัน
+
+ตัวอย่าง JSX:
+      const element = <h1>สวัสดี, JSX!</h1>;
+หลังจากการ compile จะเป็น:
+      scriptconst element = React.createElement("h1", null, "สวัสดี, JSX!");
+
+กฎการเขียน JSX
+      1)JSX ต้องมี element หลักเพียงตัวเดียวที่ครอบ elements อื่นๆ ทั้งหมด
+      2)ต้องปิด Tags ทั้งหมด
+      3)camelCase Property Naming
+            ใน JSX, HTML attributes และ event handlers ใช้รูปแบบ camelCase:
+            <div className="container" onClick={handleClick}>
+      4) Comments ใน JSX
+            การเขียน comments ใน JSX ต้องอยู่ในเครื่องหมาย {/* ... */}:
+            jsx{/* นี่คือการ comment ใน JSX */}
+            <div>
+            {/* Comment ทั้งส่วน */}
+            <h1>หัวข้อ</h1>
+            </div>
