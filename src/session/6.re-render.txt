@@ -1,0 +1,50 @@
+Re-render เงื่อนไขการ re-render ก็คือ
+1.State ใน component เปลี่ยน
+2.component ที่อยู่สูงกว่า re-render หรือ parent component ถูก re-render ถ้าไม่ใช้ useMemo
+3.props ของ component เปลี่ยน
+4.context เปลี่ยน useContext เปลี่ยน
+
+*** Re-render !== Reset State
+เงื่อนไขที่ state ของ component จะถูก reset กลับไปเป็น init จะเกิดขึ้นเมื่อมีการ mount/unmount หรือ remount ใหม่
+1)Key ของ component เปลี่ยน
+2)Condition Rendering
+
+
+
+ParentComponent
+├── Child1
+├── Child2
+│   └── SubChild2
+
+Scenario 1  -> Parent render
+ParentCompnent re✅
+Child1 re✅
+Child2 re✅
+SubChild2 re✅
+
+Scenario 2 -> Child1 render
+ParentCompnent non-re❌
+Child1 re✅
+Child2 non-re❌
+SubChild2 non-re❌
+
+Scenario 3 -> Child2 render
+ParentCompnent non-re❌
+Child1 non-re❌
+Child2 non-re✅
+SubChild2 non-re✅
+
+Scenario 4 -> SubChild2 render
+ParentCompnent non-re❌
+Child1 non-re❌
+Child2 non-re❌
+SubChild2 non-re✅
+
+สรุปภาพรวม (แบบตาราง)
+
+การเปลี่ยนแปลง	                        Component ที่ re-render
+
+state เปลี่ยนใน ParentComponent	      ✅ Parent, ✅ Child1, ✅ Child2, ✅ SubChild2
+state เปลี่ยนใน Child1	                  ✅ Child1
+state เปลี่ยนใน Child2	                  ✅ Child2, ✅ SubChild2
+state เปลี่ยนใน SubChild2	            ✅ SubChild2

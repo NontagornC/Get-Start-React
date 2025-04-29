@@ -1,0 +1,33 @@
+useEffect ประกอบด้วย
+1)Setup Function function ที่ให้ทำงานเมื่อเกิด effect
+2)dependencies array ไว้เก็บตัวแปรที่ต้องการติดตา่มค่า
+
+useEffect(()=>{
+      // 1)ทำงานครั้งเดียว เมื่อ component ถูก mounted เสร็จแล้ว = didMount
+      console.log('onMounted')
+},[])
+
+useEffect(()=>{
+      ทำงานเมื่อ onUpdate จะทำงานทุกครั้งและ re-render หลังตัวแปรใน dependencies array เปลี่ยนแปลง
+      console.log(count)
+},[count])
+
+
+//onWillUnMount
+useEffect(()=>{
+      return()=>{
+            clean up function เช่นยกเลิก connect อะไรหรือ reset ค่าอะไรบ้างอย่าง
+      }
+},[])
+
+
+กดปุ่ม "เพิ่ม Count"
+setCount ทำงาน → React เตรียม re-render
+React เรียกฟังก์ชัน ReactLifeCycle() ใหม่
+console.log 1 ทำงาน
+useState เรียกค่า count ล่าสุด (ไม่ได้สร้างใหม่)
+console.log 2 ทำงาน
+console.log 3 ทำงาน
+สร้าง JSX และ update DOM
+useEffect ทำงานตามเงื่อนไข dependency
+

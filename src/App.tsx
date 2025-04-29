@@ -1,33 +1,37 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import ReactLifeCycle from "./component/life-cycle/ReactLifeCycle";
+import Rerender from "./component/re-render/Rerender";
 import "./App.css";
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [showChild, setShowChild] = useState(true);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+      {/* <>
+        <button
+          onClick={() => setShowChild(!showChild)}
+          style={{
+            padding: "8px 16px",
+            backgroundColor: showChild ? "#f44336" : "#4CAF50",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+          }}
+        >
+          {showChild ? "ซ่อน Component (Unmount)" : "แสดง Component (Mount)"}
         </button>
-        <p className="text-red-700">
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+        <div className="pt-10">
+          {showChild ? (
+            <ReactLifeCycle />
+          ) : (
+            <p>Child Component ถูก Unmount แล้ว</p>
+          )}
+        </div>
+      </> */}
+
+      <Rerender />
     </>
   );
 }
