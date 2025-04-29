@@ -5,11 +5,6 @@ Re-render เงื่อนไขการ re-render ก็คือ
 4.context เปลี่ยน useContext เปลี่ยน
 
 *** Re-render !== Reset State
-เงื่อนไขที่ state ของ component จะถูก reset กลับไปเป็น init จะเกิดขึ้นเมื่อมีการ mount/unmount หรือ remount ใหม่
-1)Key ของ component เปลี่ยน
-2)Condition Rendering
-
-
 
 ParentComponent
 ├── Child1
@@ -48,3 +43,16 @@ state เปลี่ยนใน ParentComponent	      ✅ Parent, ✅ Child1, 
 state เปลี่ยนใน Child1	                  ✅ Child1
 state เปลี่ยนใน Child2	                  ✅ Child2, ✅ SubChild2
 state เปลี่ยนใน SubChild2	            ✅ SubChild2
+
+
+เงื่อนไขที่ state ของ component จะถูก reset กลับไปเป็น init จะเกิดขึ้นเมื่อมีการ mount/unmount หรือ remount ใหม่
+1)Key ของ component เปลี่ยน
+2)Condition Rendering
+
+| เปลี่ยนที่ไหน | reset ทั้งหมด | reset แค่ SubChild2 |
+|----------------|----------------|----------------------|
+| เปลี่ยน key ของ `ParentComponent` | ✅ | ✅ |
+| toggle render `ParentComponent` | ✅ | ✅ |
+| เปลี่ยน key ของ `SubChild2` เท่านั้น | ❌ | ✅ |
+| toggle render `SubChild2` เท่านั้น | ❌ | ✅ |
+| setState ใน Parent/Child ใด ๆ | ❌ | ❌ |
