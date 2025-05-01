@@ -170,3 +170,6 @@ Query String (query-string)
       </div>
       );
       }
+
+
+การบ้าน สร้างเว็บ landing page ที่มีหน้า Home,หน้า Abount Us,หน้า Contact,หน้า Content:it,Content:Sport ดึง params มาแสดงเป็นหัวข้อ และหน้า 404 Not Found
