@@ -1,38 +1,24 @@
-import ReactLifeCycle from "./component/life-cycle/ReactLifeCycle";
+import { Routes, Route } from "react-router-dom";
 import Rerender from "./component/re-render/Rerender";
+import ParamsView from "./component/params/ParamsView";
 import "./App.css";
-import { useState } from "react";
 
 function App() {
-  const [showChild, setShowChild] = useState(true);
-
   return (
-    <>
-      {/* <>
-        <button
-          onClick={() => setShowChild(!showChild)}
-          style={{
-            padding: "8px 16px",
-            backgroundColor: showChild ? "#f44336" : "#4CAF50",
-            color: "white",
-            border: "none",
-            borderRadius: "4px",
-          }}
-        >
-          {showChild ? "ซ่อน Component (Unmount)" : "แสดง Component (Mount)"}
-        </button>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<div>Home ja</div>} />
+        <Route path="/rerender" element={<Rerender />} />
+        <Route path="/param/:id/:name" element={<ParamsView />} />
+        <Route
+          path="*"
+          element={<div className="text-white">hello world</div>}
+        />
 
-        <div className="pt-10">
-          {showChild ? (
-            <ReactLifeCycle />
-          ) : (
-            <p>Child Component ถูก Unmount แล้ว</p>
-          )}
-        </div>
-      </> */}
-
-      <Rerender />
-    </>
+        {/* { path: '*', element: <Pages.NotfoundPage />, isPrivate: false },
+        { path: '/', element: <Pages.HomePage /> }, */}
+      </Routes>
+    </div>
   );
 }
 

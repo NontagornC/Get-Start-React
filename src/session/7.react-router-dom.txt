@@ -1,0 +1,172 @@
+React Router DOM คืออะไร
+      React Router DOM เป็นไลบรารีมาตรฐานสำหรับการจัดการการนำทาง (Navigation) ในแอปพลิเคชัน React โดยช่วยให้เราสามารถสร้างแอปพลิเคชันแบบ Single Page Application (SPA) 
+ที่มีหลายหน้าได้ โดยไม่ต้องโหลดหน้าเว็บใหม่ทั้งหมดทุกครั้งที่มีการเปลี่ยนหน้า
+      
+      เว็บ application แต่ก่อนจะมีเพจหลายหน้าหรือที่เรียกว่่า multi pages application ถ้า user อยากได้หน้าไหนก็ส่ง url ไปแล้วจะ browser จะส่งข้อมูลไป server
+ปลายทาง server ได้รับก็จะส่งเว็บเพจกลับมาแล้วก็จะโหลด web page ใหม่เสมอ (HTML,CSS,Javascript,รูปภาพ)
+      เช่นเปลี่ยนจากหน้า page -> about จะโหลดทุกอย่างใหม่ทั้งหมด ไม่วาา header,footer จะเหมือนกันไหม
+
+      แต่ react เราเป็น Single Page Application ซึ่งจะโหลด HTML,CSS,Javascript file หลักครั้งเดียว ถ้ามีการเปลี่ยน route จะจัดการด้วย javascript จะเรียกเฉพาะข้อมูลที่ต้องการ
+และอัพเดทเฉพาะส่วนที่เปลี่ยนแปลงบนหน้าเว็บ
+      เช่นเปลี่ยนจากหน้า page -> about จะโหลดแค่ content ข้างใน ถ้า header,footer เหมือนกัน
+
+ข้อดีและข้อเสียของ Multi-Page Application
+      ข้อดี MPA:
+SEO ที่ดีกว่า: เนื้อหา HTML แต่ละหน้าพร้อมให้ search engine จัดทำดัชนีได้ง่าย
+ทำงานได้โดยไม่ต้อง JavaScript: ยังใช้งานพื้นฐานได้แม้ผู้ใช้ปิด JavaScript
+แยกการพัฒนาแต่ละหน้า: ทีมต่างๆ สามารถพัฒนาหน้าต่างๆ ได้อย่างอิสระ
+โหลดเริ่มต้นเร็ว: โหลดเฉพาะทรัพยากรที่จำเป็นสำหรับหน้านั้นๆ
+เหมาะกับเว็บไซต์เนื้อหาหลัก: เว็บที่มีเนื้อหาเป็นหลักเหมาะกับแบบนี้
+      ข้อเสีย MPA:
+ประสบการณ์ผู้ใช้ช้า: มีการกระพริบของหน้าจอทุกครั้งที่เปลี่ยนหน้า
+ใช้แบนด์วิดธ์มาก: โหลดทรัพยากรซ้ำซ้อน (header, footer, navigation) ทุกครั้ง
+เซิร์ฟเวอร์ทำงานหนัก: ต้องประมวลผล HTML ทั้งหมดทุกครั้งที่มีการเรียกหน้า
+แชร์ข้อมูลระหว่างหน้ายาก: ต้องใช้ cookies หรือ session storage
+UX ไม่ลื่นไหล: มีความล่าช้าระหว่างการเปลี่ยนหน้า
+
+ข้อดีและข้อเสียของ Single-Page Application
+      ข้อดี SPA:
+ประสบการณ์ผู้ใช้ที่รวดเร็ว: การนำทางลื่นไหล ไม่มีการกระพริบหน้าจอ
+ลดการใช้แบนด์วิดธ์: หลังจากโหลดครั้งแรก จะส่งเฉพาะข้อมูลที่จำเป็นผ่าน API
+แบ่งภาระงาน: เซิร์ฟเวอร์ทำหน้าที่เป็น API ให้ข้อมูลเท่านั้น ไม่ต้องสร้าง HTML
+ประสบการณ์คล้ายแอปเนทีฟ: ทำให้เว็บรู้สึกเหมือนแอปพลิเคชันมากกว่าเว็บไซต์
+สามารถทำงานออฟไลน์ได้บางส่วน: เมื่อพัฒนาร่วมกับเทคโนโลยี PWA
+      ข้อเสีย SPA:
+SEO ที่ยากกว่า: โดยพื้นฐานแล้ว SPA มีปัญหากับ SEO (แม้จะมีทางแก้ด้วย SSR หรือ SSG)
+การโหลดครั้งแรกช้า: ต้องโหลด JavaScript ทั้งหมดก่อนที่แอปจะพร้อมใช้งาน
+พึ่งพา JavaScript: ไม่ทำงานเลยหากผู้ใช้ปิดการใช้งาน JavaScript
+ความซับซ้อนในการพัฒนา: ต้องจัดการสถานะ, การนำทาง, การจัดการหน่วยความจำ
+ประสิทธิภาพอาจลดลงเมื่อแอปใหญ่ขึ้น: หากไม่ได้ทำ code splitting ที่ดี
+
+
+******* React Router *******
+1)user เปลี่ยน url จะอัพเดทประวัติ url ใน history (History api ของ javascript เป็น api มาตรฐานของ browser)
+2)React-Router พบการเปลี่ยนแปลง url ใน history
+3)React_Router วิ่งไปคุยกับ React เพื่อเช็คว่าต้องแสดง component ไหนอย่างไร
+4)React render เนื้อหาตาม component ที่ผูกกับ url ไว้
+
+สรุปหน้าที่ของ React Router
+1)ตรวจดูการเปลี่ยนแปลง URL
+2)คุยกับ React เอา component ที่ผูกกับ url นั้นมาแสดง
+
+วิธีใช้ yarn add react-router-DOM
+1)Import BrowserRouter จาก react-router-DOM (BrowserRouter จะเป็นตัวสำหรับการตรวจติดตามการเปลี่ยน URL)
+2)Wrape ต่อด้วย Routes ซึ่งเป็นตัว contaner ที่รวม Route ไว้เทียบเท่ากับ Switch ของ React router ตัวเก่า
+3)สร้าง Route เป็น component ที่กำหนดความสัมพันธ์ระหว่่าง url กับ component ที่แสดงผล
+      path = url ที่จะผูก, element = component ที่จะแสดง
+
+ของที่เรียกใช้ได้ใน react-router-dom
+1)Link การเปลี่ยน path จะทำผ่าน <Link/> แทน <a href=""/>
+
+2)useNavigate hook สำหรับเปลี่ยน url ที่ไม่ใช่การ click อาจจะอยู่ใน function ใดๆก็ได้ navigate('/')
+      state คืออะไร?
+      เป็นวิธีการส่งข้อมูลระหว่างหน้าในแอป React Router
+      ข้อมูลจะถูกเก็บไว้ใน History API แต่จะไม่ปรากฏใน URL (ไม่เหมือน query parameters)
+      สามารถส่งข้อมูลได้ทุกประเภท (objects, arrays, primitives) ไม่จำกัดเฉพาะ string
+      ประโยชน์ของการใช้ State
+      ในตัวอย่าง { state: { from: location.pathname } }:
+
+      import { useLocation } from 'react-router-dom';
+
+      function LoginPage() {
+      const location = useLocation();
+      const from = location.state?.from || '/'; // หากไม่มี state ให้ใช้ '/'
+      
+      const handleLoginSuccess = () => {
+      // เมื่อ login สำเร็จ ส่งกลับไปยังหน้าเดิม
+      navigate(from);
+      };
+      
+      return (
+      <div>
+            <h1>เข้าสู่ระบบ</h1>
+            <p>หลังจากเข้าสู่ระบบ คุณจะถูกส่งกลับไปยัง: {from}</p>
+            {/* ฟอร์ม login */}
+      </div>
+      );
+      }
+
+กำลังเก็บข้อมูลว่าผู้ใช้มาจาก URL ไหน
+ใช้บ่อยในกรณี redirect ไปหน้า login แล้วต้องการกลับมาที่เดิมหลังจาก login สำเร็จ
+
+3)useParams hook สำหรับแกะ parameters url ที่เป็น dynamic parameters
+        const { category, id } = useParams();
+
+4)useSearchParams สำหรับจัดการกับ query parameters
+      const [searchParams, setSearchParams] = useSearchParams();
+      const category = searchParams.get('category') || 'all';
+
+5)useLocation สำหรับดึงข้อมูลที่เกี่ยวกับ url ปัจจุบัน
+      const location = useLocation();
+      <div>
+            <p>ตำแหน่งปัจจุบัน: {location.pathname}</p>
+            <p>Query string: {location.search}</p>
+      </div>
+6)NavLink เป็น Component คล้าย Link แต่มีความสามารถเพิ่มเติมในการกำหนด style เมื่อลิงก์ตรงกับ URL ปัจจุบัน
+
+function Navigation() {
+  return (
+    <nav>
+      <NavLink 
+        to="/" 
+        className={({ isActive }) => isActive ? 'active-link' : ''}
+        end // จะ active เฉพาะเมื่อ URL ตรงกับ "/" เท่านั้น ไม่รวมเส้นทางย่อย
+      >
+        หน้าหลัก
+      </NavLink>
+      <NavLink 
+        to="/products"
+        className={({ isActive }) => isActive ? 'active-link' : ''}
+      >
+        สินค้า
+      </NavLink>
+    </nav>
+  );
+}
+
+
+เปรียบเทียบความแตกต่าง
+คุณลักษณะ	            URL Parameters	                  Query Parameters
+ตำแหน่งใน URL	     เป็นส่วนของ path: /products/:id	  หลังเครื่องหมาย ?: /products?id=123
+การประกาศ	          ต้องประกาศใน route	                   ไม่ต้องประกาศล่วงหน้า
+การใช้งานทั่วไป	       ระบุทรัพยากรเฉพาะ (ID, slug)	           กรอง, เรียงลำดับ, ตัวเลือกการแสดงผล
+ความจำเป็น	           มักจำเป็นต้องมี	                       มักเป็นตัวเลือก (optional)
+การเข้าถึง	            useParams()	                          useSearchParams()
+การเปลี่ยนค่า	       ต้องนำทางไป URL ใหม่	                 เปลี่ยนได้ด้วย setSearchParams()
+
+URL Parameters
+      URL parameters คือส่วนของ URL ที่ระบุด้วย : ในการกำหนด route
+      <Route path="/param/:id/:name" element={<ParamsView />} />
+
+Query Parameters (query-params)
+      Query parameters คือคู่ key-value ที่อยู่หลังเครื่องหมาย ? ในที่อยู่ URL
+      http://localhost:3000/rerender?page=2&sort=asc
+      const [searchParams, setSearchParams] = useSearchParams();
+      
+      // ดึงค่าจาก query parameters
+      const page = searchParams.get('page'); // "2"
+      const sort = searchParams.get('sort'); // "asc"
+
+Query String (query-string)
+      Query string คือส่วนทั้งหมดของ URL หลังเครื่องหมาย ? (ยังไม่ได้แยกวิเคราะห์)
+      http://localhost:3000/param/123/john?filter=active&view=grid
+
+      import { useLocation } from 'react-router-dom';
+
+      function ParamsView() {
+      const location = useLocation();
+      const { id, name } = useParams();
+      
+      // เข้าถึง query string ทั้งหมด
+      console.log(location.search); // "?filter=active&view=grid"
+      
+      return (
+      <div>
+            <h1>URL Information</h1>
+            <p>ID: {id}</p>
+            <p>Name: {name}</p>
+            <p>Query String: {location.search}</p>
+            <p>Full Path: {location.pathname}{location.search}</p>
+      </div>
+      );
+      }
