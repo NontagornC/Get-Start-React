@@ -1,0 +1,61 @@
+Context
+
+เป็น Hook สำหรับส่งข้อมูลจาก component ที่อยู่ในเลเวลบนไปยัง component ย่อยด้วยการส่งข้อมูลจาก component ที่เรียกว่า Provider เช่น 
+ถ้ามี state ที่ใช้ทั้ง parent1,child1 จะต้องส่ง state และ setState ลงไป และถ้าใช้ที่ child2 อีกก็จะต้องส่งไปลงไปอีก
+
+ควรใช้ useContext ตอนไหน
+1)มีข้อมูลที่ใช้ร่วมกันในหลาย component เพราะจะส่ง props 
+2)เมื่อมีปัญหา prop drilling หรือต้องส่ง props ลงไปใน component หลายๆชั้นลึกลงไป
+
+ข้อดี
+1)ลดความซับซ้อน
+2)ทำให้โค้ดอ่านง่าย
+
+ข้อเสีย
+1)มีปัญหาด้าน performance เพราะถ้า conext เปลี่ยนทุกๆ component ที่ใช้ context จะ re-render
+2)ทำให้ component ผูกติดกับ context มากกว่าไป เช่น component ที่ถูกเรียกใช้ context ก็จะต้องถูก wrap context เสมอ
+
+เริ่มต้นจะต้องสร้าง Context object ขึ้นมาเพื่อเก็บข้อมูลที่ต้องการแชร์ระหว่าง component ก่อน ซึ่งแต่ละ context เองก็จะมี provider ติดมาด้วยเพื่อบอกว่าขอบเขตไหนที่เราสามารถใช้ context ได้บ้าง
+โดย component ทุก component ที่อยู่ภายในใต้ context ก็จะสามารถใช้ข้อมูลใน useContext ได้บ้าง
+
+// !!! step การสร้าง Context
+1)สร้าง Context โดยใช้ createContext() ใน level ของตัวที่ต้องการประกาศตัวแปรเพื่อส่งไปแชร์กับ component อื่นๆ โดยปกติแล้วจะอยู่ที่ component แม่ที่ level สูงที่สุด
+      ปกติประกาศนอก View
+      export MyContext = createContext(null)
+
+      หรือสร้าง interface context เป็น interface IContextProps {
+            useHello:string;
+            setHello:any
+      }
+
+const  MyContext = createContext<ThemeContextType | null>(null);
+
+
+2) เอา Context ไป wrap ทุก Component ที่จะใช้งานเช่น
+
+<MyContext.Provider value={{ username, setUsername }}>                      
+      <Login />
+      <User />        
+</MyContext.Provider>
+
+หรือ
+
+const obj = {
+      username
+      setUsername
+}
+
+const obj2 = {
+      username:username,
+      setUsername:setUsername
+}
+
+<MyContext.Provider value={obj}>                      
+      <Login />
+      <User />        
+</MyContext.Provider>
+
+3)ตัว component ลูกก็สามารถเรียกใช้ได้โดยการเรียก useContext(context) เช่น useContext(MyContext)
+const { username } = useContext(AppContext);
+
+

@@ -1,0 +1,15 @@
+React Query คืออะไรและการใช้งานเบื้องต้น
+      1. React Query คืออะไร?
+React Query เป็นไลบรารีสำหรับการจัดการข้อมูลจากเซิร์ฟเวอร์ (server state) ใน React application ถูกออกแบบมาเพื่อแก้ปัญหาการดึงข้อมูล การแคช และการซิงค์ข้อมูลระหว่างไคลเอนต์กับเซิร์ฟเวอร์อย่างมีประสิทธิภาพ
+
+หมายเหตุ: ปัจจุบัน React Query ได้เปลี่ยนชื่อเป็น TanStack Query และรองรับหลาย frameworks นอกเหนือจาก React
+
+
+# ติดตั้งด้วย npm
+npm install @tanstack/react-query
+
+# หรือด้วย yarn
+yarn add @tanstack/react-query
+
+# เพิ่ม DevTools (แนะนำสำหรับการพัฒนา)
+npm install @tanstack/react-query-devtools

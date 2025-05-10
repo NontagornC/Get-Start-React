@@ -1,0 +1,85 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useMemo } from "react";
+
+function UseMemoExample() {
+  const [number, setNumber] = useState(0);
+  const [someValue, setSomeValue] = useState(0);
+  const [useMock1, setMock1] = useState(0);
+  const [useMock2, setMock2] = useState(0);
+
+  const getTimestamp = () => new Date().getTime();
+
+  const numberWithoutMemo = getTimestamp();
+
+  const getNumberWithMemo = useMemo(() => {
+    return getTimestamp();
+  }, [someValue]);
+
+  const handleCal = useMemo(() => {
+    return useMock1 + useMock2;
+    //   }, [useMock1, useMock2]);
+  }, [useMock1]);
+
+  return (
+    <>
+      <p>แบบไม่ใช้ useMemo: {numberWithoutMemo}</p>
+      <hr />
+      <p>แบบใช้ useMemo: {getNumberWithMemo}</p>
+      <hr />
+      <p>mock 1: {useMock1}</p>
+      <hr />
+      <p>mock 2: {useMock2}</p>
+      <hr />
+      <p>Sum : {handleCal}</p>
+      <button
+        onClick={() => {
+          setMock1((prev) => ++prev);
+        }}
+      >
+        เพิ่ม mock 1(+)
+      </button>
+      <button
+        onClick={() => {
+          setMock2((prev) => ++prev);
+        }}
+      >
+        เพิ่ม mock 2(+)
+      </button>
+      ทดลองเปลี่ยนค่า (Number): {number}
+      <br />
+      <button
+        onClick={() => {
+          setNumber((prev) => ++prev);
+        }}
+      >
+        เพิ่ม (+)
+      </button>
+      <button
+        onClick={() => {
+          setNumber((prev) => --prev);
+        }}
+      >
+        ลด (-)
+      </button>
+      <hr />
+      ทดลองเปลี่ยนค่า (Some value): {someValue}
+      <br />
+      <button
+        onClick={() => {
+          setSomeValue((prev) => ++prev);
+        }}
+      >
+        เพิ่ม (+)
+      </button>
+      <button
+        onClick={() => {
+          setSomeValue((prev) => --prev);
+        }}
+      >
+        ลด (-)
+      </button>
+    </>
+  );
+}
+
+export default UseMemoExample;

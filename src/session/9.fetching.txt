@@ -1,0 +1,162 @@
+******** 1. GET Request (ดึงข้อมูล) ********
+// Basic GET request
+fetch('https://api.example.com/users')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.json(); // แปลง response เป็น JSON
+  })
+  .then(data => {
+    console.log('Data received:', data);
+  })
+  .catch(error => {
+    console.error('GET request failed:', error);
+  });
+
+// GET with query parameters
+fetch('https://api.example.com/users?page=1&limit=10')
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+// GET with headers
+fetch('https://api.example.com/users', {
+  method: 'GET',
+  headers: {
+    'Authorization': 'Bearer your_token_here',
+    'Accept': 'application/json'
+  }
+})
+  .then(response => response.json())
+  .then(data => console.log(data));
+
+
+
+
+
+
+******** 2. POST Request (สร้างข้อมูลใหม่) ********
+// POST with JSON data
+fetch('https://api.example.com/users', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer your_token_here'
+  },
+  body: JSON.stringify({
+    name: 'John Doe',
+    email: 'john@example.com',
+    age: 30
+  })
+})
+  .then(response => {
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    return response.json();
+  })
+  .then(data => console.log('Created user:', data))
+  .catch(error => console.error('POST request failed:', error));
+
+// POST with form data
+const formData = new FormData();
+formData.append('name', 'John Doe');
+formData.append('email', 'john@example.com');
+formData.append('profile_image', fileInput.files[0]); // ส่งไฟล์
+
+fetch('https://api.example.com/users', {
+  method: 'POST',
+  body: formData
+  // ไม่ต้องกำหนด Content-Type เพราะ FormData จะจัดการให้อัตโนมัติ
+})
+  .then(response => response.json())
+  .then(data => console.log('Created user:', data));
+
+
+
+
+
+
+******** 3. PUT Request (อัพเดทข้อมูลทั้งหมด) ********
+// PUT request (แทนที่ข้อมูลทั้งหมด)
+fetch('https://api.example.com/users/123', {
+  method: 'PUT',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer your_token_here'
+  },
+  body: JSON.stringify({
+    name: 'John Updated',
+    email: 'john.updated@example.com',
+    age: 31
+  })
+})
+  .then(response => {
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    return response.json();
+  })
+  .then(data => console.log('Updated user:', data))
+  .catch(error => console.error('PUT request failed:', error));
+
+
+
+
+
+
+******** 4. PATCH Request (อัพเดทข้อมูลบางส่วน) ********
+// PATCH request (อัพเดทเฉพาะบางฟิลด์)
+fetch('https://api.example.com/users/123', {
+  method: 'PATCH',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer your_token_here'
+  },
+  body: JSON.stringify({
+    email: 'new.email@example.com' // อัพเดทเฉพาะอีเมล
+  })
+})
+  .then(response => {
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    return response.json();
+  })
+  .then(data => console.log('Partially updated user:', data))
+  .catch(error => console.error('PATCH request failed:', error));
+
+
+
+
+
+
+******** 5. DELETE Request (ลบข้อมูล) ********
+// DELETE request
+fetch('https://api.example.com/users/123', {
+  method: 'DELETE',
+  headers: {
+    'Authorization': 'Bearer your_token_here'
+  }
+})
+  .then(response => {
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    
+    // บาง API อาจจะไม่ส่ง response body กลับมา (204 No Content)
+    if (response.status !== 204) {
+      return response.json();
+    }
+    return { success: true };
+  })
+  .then(data => console.log('Deleted user:', data))
+  .catch(error => console.error('DELETE request failed:', error));
+
+
+
+
+
+ความแตกต่างระหว่าง Fetch API native vs Axios
+
+คุณสมบัติ	                Fetch                                  API	Axios
+การติดตั้ง	            ไม่ต้องติดตั้ง (built-in)	                   ต้องติดตั้ง package
+การจัดการ JSON	     ต้อง .then(res => res.json())	           แปลง JSON ให้อัตโนมัติ
+Interceptors	      ไม่มี	                                     มี (สามารถแทรกโค้ดระหว่าง request/response)
+ป้องกัน XSRF	        ไม่มี	                                     มี
+การยกเลิก request	   ใช้ AbortController	                     ใช้ CancelToken หรือ AbortController
+Timeout	            ต้องตั้งค่าเอง	                             มีค่า timeout ในตัว
+HTTP Errors	        ต้องเช็ค response.ok	                     จัดการ error ให้อัตโนมัติ
+ความเข้ากันได้กับ       Browser	ไม่รองรับ IE	                     รองรับทุก browser (มี polyfills)

@@ -1,0 +1,42 @@
+หัวข้อที่ควรสอนต่อสำหรับ Junior Frontend Developer
+จากการที่คุณได้สอนพื้นฐาน React ไปแล้ว (การสร้าง Component, useState, useEffect, re-render, react-router-dom, useContext) ต่อไปนี้คือหัวข้อที่ควรสอนเพิ่มเติม:
+
+1. Advanced Hooks
+      useReducer - สำหรับจัดการ state ที่ซับซ้อน
+      useRef - การเข้าถึง DOM และเก็บค่าที่ไม่ทำให้เกิด re-render
+      Custom Hooks - สร้าง hook เป็นของตัวเอง
+2. Performance Optimization
+      useMemo - เก็บค่าที่คำนวณแล้วไม่ให้คำนวณซ้ำ
+      useCallback - เก็บ function ไม่ให้สร้างใหม่ทุกครั้งที่ re-render
+      React.memo - ป้องกัน component re-render ถ้า props ไม่เปลี่ยน
+3. Form Handling
+      Controlled vs Uncontrolled Components
+      Form Libraries (React Hook Form, Formik)
+      การ validate form
+4. การจัดการ API Calls
+      Fetch API และ Axios
+      การจัดการ loading states และ errors
+      React Query หรือ SWR
+5. State Management Library
+      Redux หรือ Redux Toolkit
+      อื่นๆ เช่น Zustand, Jotai, Recoil
+6. TypeScript กับ React
+      การเขียน Props Types
+      Generic Components
+      Type Safety กับ custom hooks
+7. Testing
+      Unit Testing ด้วย Jest
+      Component Testing ด้วย React Testing Library
+      Mock API Calls
+8. Styling Solutions
+      CSS Modules
+      Styled Components
+      Tailwind CSS
+9. Modern React Patterns
+      Compound Components
+      React Portals
+      Error Boundaries
+10. Next.js
+      Server-Side Rendering (SSR)
+      Static Site Generation (SSG)
+      API Routes
